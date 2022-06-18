@@ -1,0 +1,9 @@
+[alias]
+rb = "build --release"
+r = "run"
+
+[build]
+incremental = false
+
+[cargo-new]
+vcs = "none"
