@@ -1,4 +1,8 @@
 [workspace]
 members = [
     "computer-vision/codecs/jpeg-sys",
+    "computer-vision/codecs/jpeg",
+    "computer-vision/common",
+    "computer-vision/primitives",
+    "people-remover",
 ]

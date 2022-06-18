@@ -1,4 +1,3 @@
-
 // C Code doesn't follow rust styles.
 // generated code doesn't follow styles either
 // tell the compiler we don't care about style
