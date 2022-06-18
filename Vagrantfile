@@ -12,7 +12,7 @@ Vagrant.configure("2") do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://vagrantcloud.com/search.
-  config.vm.box = "ubuntu/bionic64"
+  config.vm.box = "ashleykleynhans/jammy64"
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -69,5 +69,8 @@ Vagrant.configure("2") do |config|
     apt install -y build-essential
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs -o /tmp/rust-installer
     sudo -EHu vagrant sh /tmp/rust-installer -y
+
+    # build dependencies
+    apt -y install ninja-build cmake nasm llvm clang libclang-dev
   SHELL
 end

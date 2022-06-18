@@ -1,0 +1,4 @@
+[workspace]
+members = [
+    "computer-vision/codecs/jpeg-sys",
+]

@@ -4,3 +4,6 @@
 # Remove Vagrant files
 .vagrant
 *.log
+
+# Ignore the outputs
+target/
