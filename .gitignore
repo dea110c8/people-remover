@@ -1,0 +1,6 @@
+# Remove vim files
+.*.swp
+
+# Remove Vagrant files
+.vagrant
+*.log
