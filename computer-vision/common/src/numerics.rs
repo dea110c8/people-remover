@@ -97,3 +97,13 @@ impl NumericType for f64 {
         1.0
     }
 }
+
+pub trait ToUsize {
+    fn to_usize(&self) -> usize;
+}
+
+impl ToUsize for u32 {
+    fn to_usize(&self) -> usize {
+        *self as usize
+    }
+}

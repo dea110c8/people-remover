@@ -1,4 +1,4 @@
-use crate::numerics::NumericType;
+use crate::numerics::{NumericType, ToUsize};
 
 #[derive(PartialEq, Debug)]
 pub struct Matrix<T: NumericType> {
@@ -8,6 +8,14 @@ pub struct Matrix<T: NumericType> {
 }
 
 impl<T: NumericType> Matrix<T> {
+
+    pub fn new<I : ToUsize>(width: I, height: I) -> Self {
+        let width : usize = width.to_usize();
+        let height : usize = height.to_usize();
+
+        Self { data: vec![T::zero(); width * height], width: width, height: height }
+    }
+
     /// Generates a square matrix of `size` by `size` that is an identity matrix.
     pub fn identity(size: usize) -> Self {
         let mut values = vec![T::zero(); size * size];
