@@ -1,6 +1,10 @@
 use std::{ffi, io, mem, path};
-
-pub struct JpegImage;
+use common::Matrix;
+pub struct JpegImage {
+    width: u32,
+    height: u32,
+    data: Matrix<u32>,
+}
 
 impl JpegImage {
     pub fn read<P: AsRef<path::Path>>(path: P) -> Result<Box<Self>, common::Error> {
@@ -31,15 +35,39 @@ impl JpegImage {
             jpeg_sys::jpeg_read_header(&mut scratch, jpeg_sys::TRUE as i32);
             jpeg_sys::jpeg_start_decompress(&mut scratch);
 
+            let w = scratch.image_width;
+            let h = scratch.image_height;
+
+            let data = Matrix::new(w, h);
+
             todo!("finish reading file!");
 
             jpeg_sys::jpeg_finish_decompress(&mut scratch);
             jpeg_sys::jpeg_destroy_decompress(&mut scratch);
             jpeg_sys::fclose(stream);
 
-            Ok(Box::new(Self {}))
+            Ok(Box::new(Self {
+                width: w,
+                height: h,
+                data: data,
+            }))
         }
     }
 }
 
-impl common::Image for JpegImage {}
+impl common::Image for JpegImage {
+
+    type PixelFormat = u32;
+
+    fn width(&self) -> u32 {
+        self.width
+    }
+
+    fn height(&self) -> u32 {
+        self.height
+    }
+
+    fn get_matrix(&self) -> &common::Matrix<Self::PixelFormat> where <Self as common::Image>::PixelFormat : common::NumericType {
+        &self.data
+    }
+}
